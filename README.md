@@ -3,7 +3,11 @@
 Website for TLA Student Clubs (join or start a student-led club).
 
 ## Editing clubs
-All club info and site links live in `assets/clubs.js` — add, edit or remove a club block there and commit. No build step.
+Clubs are managed in the **TLA Clubs Editor** (Google Sheet + Apps Script). Leaders and
+sponsors edit their own club, and an admin approves changes. Setup: [`editor/SETUP.md`](editor/SETUP.md).
+
+Until the editor's feed is connected (`feedUrl` in `assets/clubs.js`), the site uses the
+backup list in `assets/clubs.js`. No build step.
 
 ## Moving to a custom domain
-Add a `CNAME` file containing the domain (e.g. `clubs.schoolathome.ca`), point a DNS CNAME record at `traditional-learning-academy-online.github.io`, then set the custom domain under Settings → Pages.
+Add a `CNAME` file containing the domain (e.g. `clubs.schoolathome.ca`), point a DNS CNAME record at `ebuskell-source.github.io`, then set the custom domain under Settings → Pages.

@@ -28,7 +28,13 @@
   document.querySelectorAll(".js-manager-email").forEach(function (a) {
     if (S.managerEmail) { a.href = "mailto:" + S.managerEmail; a.textContent = S.managerEmail; }
   });
-  document.querySelectorAll(".js-count").forEach(function (e) { e.textContent = clubs.length; });
+  function setCount() {
+    document.querySelectorAll(".js-count").forEach(function (e) { e.textContent = clubs.length; });
+  }
+  setCount();
+  document.querySelectorAll(".js-editor").forEach(function (a) {
+    if (S.editorUrl) { a.href = S.editorUrl; a.hidden = false; }
+  });
   document.querySelectorAll(".js-this-year").forEach(function (e) { e.textContent = new Date().getFullYear(); });
 
   // Cards
@@ -118,4 +124,44 @@
   dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
 
   render();
+
+  // Live club list from the Google Sheet (published "Clubs" tab as CSV)
+  function parseCSV(text) {
+    var rows = [], row = [], cell = "", q = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (q) {
+        if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; }
+        else cell += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n" || ch === "\r") {
+        if (ch === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell); rows.push(row); row = []; cell = "";
+      } else cell += ch;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+
+  if (S.feedUrl) {
+    fetch(S.feedUrl + (S.feedUrl.indexOf("?") > -1 ? "&" : "?") + "t=" + Date.now())
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (text) {
+        var rows = parseCSV(text), head = rows.shift().map(function (x) { return x.trim(); });
+        var list = rows.map(function (r) {
+          var o = {}; head.forEach(function (k, i) { o[k] = (r[i] || "").trim(); }); return o;
+        }).filter(function (c) {
+          return c.name && String(c.visible).toUpperCase() !== "FALSE";
+        }).sort(function (a, b) { return (+a.order || 0) - (+b.order || 0); })
+          .map(function (c) {
+            c.year = parseInt(c.year, 10) || 1;
+            c.leaders = c.leaders ? c.leaders.split(",").map(function (x) { return x.trim(); }).filter(Boolean) : [];
+            return c;
+          });
+        if (!list.length) return;
+        clubs = list; setCount(); render();
+      })
+      .catch(function (e) { console.warn("Club feed unavailable, using backup list", e); });
+  }
 })();

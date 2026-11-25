@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link rel="icon" href="https://ebuskell-source.github.io/tla-clubs/assets/tla-logo.svg">
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#1b1b1b; --navy:#1f2f5c; --red:#c0392b; --hl:#fff27a; --paper:#fffdf6; --link:#1a4fb0;
+      --hand:"Patrick Hand","Comic Neue","Chalkboard SE",cursive; --serif:Georgia,"Times New Roman",serif; --mono:"Courier New",Courier,monospace; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:var(--serif); font-size:16px; line-height:1.5; color:var(--ink);
+      background:#efe8d8 radial-gradient(#d9ceb6 1px, transparent 1.2px) 0 0/22px 22px; }
+    a { color:var(--link); } a:hover { background:var(--hl); }
+    header { background:var(--navy); color:#fff; border-bottom:3px solid var(--ink); }
+    header .in { max-width:980px; margin:0 auto; padding:12px 16px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+    .mark { background:var(--paper); border:2px solid var(--ink); padding:2px 5px 0; transform:rotate(-4deg); display:inline-block; line-height:0; box-shadow:2px 2px 0 #000; }
+    .mark img { height:34px; }
+    header h1 { font-size:1.2rem; margin:0; }
+    header .who { margin-left:auto; font-family:var(--mono); font-size:.85rem; }
+    header a { color:#ffd76b; }
+    main { max-width:980px; margin:0 auto; padding:22px 16px 60px; }
+    .box { background:var(--paper); border:2px solid var(--ink); box-shadow:5px 5px 0 rgba(0,0,0,.85); padding:22px 24px; margin-bottom:28px; }
+    h2 { margin:0 0 .5em; font-size:1.6rem; }
+    h3 { margin:0 0 .3em; }
+    .eyebrow { font-family:var(--mono); font-size:.8rem; text-transform:uppercase; color:var(--red); margin:0 0 4px; }
+    .eyebrow::before { content:"// "; }
+    .muted { color:#555; }
+    .hand { font-family:var(--hand); font-size:1.15rem; }
+    .btn { font-family:var(--mono); font-weight:bold; font-size:.9rem; background:#fff; color:var(--ink); border:2px solid var(--ink);
+      padding:5px 11px; box-shadow:3px 3px 0 var(--ink); cursor:pointer; }
+    .btn:hover { background:var(--hl); }
+    .btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+    .btn:disabled { opacity:.5; cursor:wait; }
+    .btn.yes { background:#c9f0d2; } .btn.no { background:#ffd0cc; } .btn.yellow { background:#ffd76b; }
+    .btn.tiny { padding:1px 7px; font-size:.8rem; box-shadow:2px 2px 0 var(--ink); }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .tabs { display:flex; gap:6px; margin-bottom:-2px; position:relative; z-index:1; font-family:var(--mono); }
+    .tabs button { font:inherit; background:#e4dcc8; border:2px solid var(--ink); border-bottom:none; padding:6px 14px; cursor:pointer; }
+    .tabs button.on { background:var(--paper); font-weight:bold; }
+    .club { border:1px solid #999; border-top:7px solid var(--c,#1565c0); background:#fff; padding:14px 16px; margin-bottom:14px; }
+    .c-berry{--c:#c2185b} .c-forest{--c:#2e7d32} .c-ocean{--c:#1565c0} .c-gold{--c:#b8860b} .c-plum{--c:#6a1b9a} .c-rust{--c:#bf4a10}
+    .status { display:inline-block; font-family:var(--mono); font-size:.8rem; border:1.5px solid; padding:0 6px; transform:rotate(-2deg); }
+    .st-pending { color:#a66a00; } .st-approved { color:#2e7d32; } .st-rejected { color:var(--red); }
+    form.club-form { display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-top:12px; }
+    form.club-form .full { grid-column:1/-1; }
+    label { display:block; font-family:var(--mono); font-size:.8rem; text-transform:uppercase; font-weight:bold; }
+    label small { text-transform:none; font-weight:normal; color:#666; }
+    input, select, textarea { font:inherit; font-family:var(--serif); width:100%; border:2px solid var(--ink); padding:5px 8px; background:#fff; margin-top:2px; }
+    textarea { min-height:150px; resize:vertical; }
+    input:focus, select:focus, textarea:focus { outline:3px solid var(--hl); }
+    table { border-collapse:collapse; width:100%; font-size:.92rem; }
+    th, td { border:1px solid #999; padding:6px 8px; text-align:left; vertical-align:top; }
+    th { background:#f2ecdf; font-family:var(--mono); font-size:.78rem; text-transform:uppercase; }
+    .diff td.old { background:#ffeceb; text-decoration:line-through; color:#7a2b22; }
+    .diff td.new { background:#eaf7ec; }
+    .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%) rotate(-1deg); background:#fff7a8; border:2px solid var(--ink);
+      padding:8px 16px; font-family:var(--hand); font-size:1.2rem; box-shadow:3px 3px 0 var(--ink); display:none; z-index:9; max-width:90%; }
+    .toast.err { background:#ffd0cc; }
+    .sticky { background:#fff7a8; padding:12px 14px; box-shadow:2px 3px 0 rgba(0,0,0,.2); transform:rotate(-.6deg); margin:10px 0; }
+    .hidden-club { opacity:.55; }
+    @media (max-width:640px){ form.club-form { grid-template-columns:1fr; } .box { padding:16px; } }
+  </style>
+</head>
+<body>
+  <header><div class="in">
+    <span class="mark"><img src="https://ebuskell-source.github.io/tla-clubs/assets/tla-logo.svg" alt="TLA"></span><h1>Student Clubs — Editor</h1>
+    <span class="who" id="who">loading…</span>
+  </div></header>
+  <main id="app"><p class="hand">Loading your clubs…</p></main>
+  <div class="toast" id="toast"></div>
+
+<script>
+var S = null, adminTab = 'approvals', openForm = null;
+
+/* tiny DOM helper: h('div', {class:'x', onclick:fn}, child, 'text', ...) */
+function h(tag, attrs) {
+  var el = document.createElement(tag);
+  attrs = attrs || {};
+  Object.keys(attrs).forEach(function (k) {
+    var v = attrs[k];
+    if (v == null || v === false) return;
+    if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
+    else if (k === 'value') el.value = v;
+    else el.setAttribute(k, v === true ? '' : v);
+  });
+  for (var i = 2; i < arguments.length; i++) add(el, arguments[i]);
+  return el;
+}
+function add(el, c) {
+  if (c == null || c === false) return;
+  if (Array.isArray(c)) return c.forEach(function (x) { add(el, x); });
+  el.appendChild(c.nodeType ? c : document.createTextNode(String(c)));
+}
+function toast(msg, err) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast' + (err ? ' err' : ''); t.style.display = 'block';
+  clearTimeout(toast._t); toast._t = setTimeout(function () { t.style.display = 'none'; }, 4000);
+}
+function when(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? iso : d.toLocaleString(); }
+function clubName(id) { var c = (S.clubs || []).filter(function (x) { return String(x.id) === String(id); })[0]; return c ? c.name : id; }
+
+/* call server; disables the clicked button meanwhile */
+function call(fn, args, okMsg, btn) {
+  if (btn) btn.disabled = true;
+  var r = google.script.run.withSuccessHandler(function (state) {
+    S = state; openForm = null; render(); if (okMsg) toast(okMsg);
+  }).withFailureHandler(function (e) {
+    if (btn) btn.disabled = false; toast(e.message || String(e), true);
+  });
+  r[fn].apply(r, args || []);
+}
+/* "click twice to confirm" instead of popups */
+function confirmBtn(label, fn) {
+  var b = h('button', { class: 'btn tiny no', type: 'button' }, label);
+  b.addEventListener('click', function () {
+    if (b.dataset.armed) return fn(b);
+    b.dataset.armed = '1'; b.textContent = 'sure?';
+    setTimeout(function () { delete b.dataset.armed; b.textContent = label; }, 3000);
+  });
+  return b;
+}
+
+function load() {
+  google.script.run.withSuccessHandler(function (s) { S = s; render(); })
+    .withFailureHandler(function (e) {
+      document.getElementById('app').replaceChildren(h('div', { class: 'box' },
+        h('h2', {}, 'Hmm, something went wrong'), h('p', {}, e.message || String(e))));
+    }).getState();
+}
+
+function render() {
+  var who = document.getElementById('who');
+  who.replaceChildren('signed in as ' + S.email + ' · ', h('a', { href: S.siteUrl, target: '_blank' }, 'view site ↗'));
+  var app = document.getElementById('app');
+  app.replaceChildren();
+  app.appendChild(renderMine());
+  if (S.isAdmin) app.appendChild(renderAdmin());
+}
+
+/* ---------- My clubs (leaders & sponsors) ---------- */
+function renderMine() {
+  var box = h('section', { class: 'box' },
+    h('p', { class: 'eyebrow' }, 'my clubs'),
+    h('h2', {}, 'Clubs you can edit'));
+  if (!S.myClubs.length) {
+    box.appendChild(h('p', { class: 'hand' }, S.isAdmin
+      ? "You're not assigned to any clubs yourself — use the admin section below to manage everything."
+      : "You're not assigned to a club yet. If you lead or sponsor one, ask Mr. Buskell to add you!"));
+    return box;
+  }
+  box.appendChild(h('p', { class: 'muted' }, 'Changes you submit are reviewed by the Student Clubs manager before they appear on the site.'));
+  S.myClubs.forEach(function (m) {
+    var c = m.club, key = 'mine:' + c.id;
+    var st = m.pending ? { status: 'pending' } : m.lastStatus;
+    var card = h('div', { class: 'club c-' + (c.colour || 'ocean') },
+      h('div', { class: 'row' },
+        h('h3', {}, (c.icon || '') + ' ' + c.name),
+        h('span', { class: 'muted' }, '(' + m.role + ')'),
+        st && st.status !== 'withdrawn' && st.status !== 'replaced'
+          ? h('span', { class: 'status st-' + st.status }, st.status === 'pending' ? 'waiting for approval' : st.status)
+          : null,
+        h('span', { style: 'margin-left:auto' },
+          openForm === key ? null : h('button', { class: 'btn yellow', onclick: function () { openForm = key; render(); } },
+            m.pending ? 'Edit my pending changes' : 'Edit this club'))));
+    if (m.lastStatus && m.lastStatus.status === 'rejected' && m.lastStatus.note && !m.pending) {
+      card.appendChild(h('div', { class: 'sticky hand' }, 'Note from the manager: ' + m.lastStatus.note));
+    }
+    if (m.pending && openForm !== key) {
+      card.appendChild(h('p', { class: 'muted' }, 'You have changes waiting for approval. ',
+        confirmBtn('withdraw them', function (b) { call('withdrawDraft', [c.id], 'Changes withdrawn.', b); })));
+    }
+    if (openForm === key) {
+      card.appendChild(clubForm(m.pending || c, 'Submit for approval', function (data, btn) {
+        call('submitDraft', [c.id, data], 'Sent for approval — thanks!', btn);
+      }));
+    }
+    box.appendChild(card);
+  });
+  return box;
+}
+
+/* ---------- shared club form ---------- */
+function clubForm(c, submitLabel, onSubmit) {
+  function field(name, label, el, full, hint) {
+    el.name = name;
+    return h('div', { class: full ? 'full' : '' }, h('label', {}, label, hint ? h('small', {}, ' — ' + hint) : null), el);
+  }
+  function sel(opts, val) {
+    var s = h('select');
+    opts.forEach(function (o) { s.appendChild(h('option', { value: o }, o)); });
+    s.value = val || opts[0]; return s;
+  }
+  var leaders = Array.isArray(c.leaders) ? c.leaders.join(', ') : (c.leaders || '');
+  var f = h('form', { class: 'club-form' },
+    field('name', 'Club name', h('input', { value: c.name || '', required: true, maxlength: 120 })),
+    field('icon', 'Icon', h('input', { value: c.icon || '', maxlength: 8 }), false, 'one emoji, e.g. 📚'),
+    field('format', 'Format', sel(S.formats, c.format)),
+    field('colour', 'Card colour', sel(S.colours, c.colour)),
+    field('leaders', 'Led by', h('input', { value: leaders }), false, 'separate names with commas'),
+    field('year', 'Years running', h('input', { type: 'number', min: 1, max: 50, value: c.year || 1 }), false, '1 = new this year'),
+    field('summary', 'One-line summary', h('input', { value: c.summary || '', maxlength: 160 }), true, 'shown on the card'),
+    field('description', 'Full description', h('textarea', { maxlength: 4000 }, c.description || ''), true),
+    field('meetings', 'Meetings', h('input', { value: c.meetings || '' }), true, 'day, time, how often'),
+    field('email', 'Contact email', h('input', { type: 'email', value: c.email || '' })),
+    field('website', 'Website', h('input', { type: 'url', value: c.website || '', placeholder: 'https://… (optional)' })),
+    field('members', 'Current members', h('input', { value: c.members || '' }), true, 'optional — leave blank for "TBD"'));
+  var btn = h('button', { class: 'btn yes', type: 'submit' }, submitLabel);
+  f.appendChild(h('div', { class: 'full row' }, btn,
+    h('button', { class: 'btn', type: 'button', onclick: function () { openForm = null; render(); } }, 'Cancel')));
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = {};
+    Array.prototype.forEach.call(f.elements, function (el) { if (el.name) data[el.name] = el.value; });
+    onSubmit(data, btn);
+  });
+  return f;
+}
+
+/* ---------- Admin ---------- */
+function renderAdmin() {
+  var box = h('section', { class: 'box' }, h('p', { class: 'eyebrow' }, 'admin'), h('h2', {}, 'Manage clubs'));
+  var tabs = [['approvals', 'Approvals (' + S.pending.length + ')'], ['clubs', 'Clubs'], ['people', 'People']];
+  var bar = h('div', { class: 'tabs' });
+  tabs.forEach(function (t) {
+    bar.appendChild(h('button', { class: adminTab === t[0] ? 'on' : '', onclick: function () { adminTab = t[0]; openForm = null; render(); } }, t[1]));
+  });
+  box.appendChild(bar);
+  var panel = h('div', { style: 'border:2px solid var(--ink); padding:16px; background:var(--paper)' });
+  box.appendChild(panel);
+  if (adminTab === 'approvals') renderApprovals(panel);
+  if (adminTab === 'clubs') renderClubs(panel);
+  if (adminTab === 'people') renderPeople(panel);
+  return box;
+}
+
+var LABELS = { name: 'Name', icon: 'Icon', colour: 'Colour', format: 'Format', year: 'Years running', leaders: 'Led by',
+  summary: 'Summary', description: 'Description', meetings: 'Meetings', email: 'Contact email', website: 'Website', members: 'Members' };
+
+function renderApprovals(p) {
+  if (!S.pending.length) { p.appendChild(h('p', { class: 'hand' }, 'Nothing waiting. ✓ All caught up!')); return; }
+  S.pending.forEach(function (d) {
+    var rows = Object.keys(LABELS).filter(function (k) {
+      return String(d.data[k] == null ? '' : d.data[k]) !== String(d.current[k] == null ? '' : d.current[k]);
+    }).map(function (k) {
+      return h('tr', {}, h('th', {}, LABELS[k]), h('td', { class: 'old' }, String(d.current[k] || '—')), h('td', { class: 'new' }, String(d.data[k] || '—')));
+    });
+    var note = h('input', { placeholder: 'Note to send back (optional — useful when rejecting)' });
+    var card = h('div', { class: 'club c-' + (d.data.colour || 'ocean') },
+      h('h3', {}, (d.data.icon || '') + ' ' + d.data.name),
+      h('p', { class: 'muted' }, 'from ' + d.submitted_by + ' · ' + when(d.submitted_at)),
+      rows.length
+        ? h('table', { class: 'diff' }, h('tr', {}, h('th', {}, 'Field'), h('th', {}, 'Now'), h('th', {}, 'Proposed')), rows)
+        : h('p', { class: 'hand' }, 'No actual changes in this one.'),
+      h('div', { class: 'row', style: 'margin-top:10px' }, note,
+        h('button', { class: 'btn yes', onclick: function (e) { call('reviewDraft', [d.draft_id, true, note.value], 'Approved & published.', e.target); } }, 'Approve'),
+        h('button', { class: 'btn no', onclick: function (e) { call('reviewDraft', [d.draft_id, false, note.value], 'Sent back.', e.target); } }, 'Reject')));
+    p.appendChild(card);
+  });
+}
+
+function renderClubs(p) {
+  p.appendChild(h('p', { class: 'muted' }, 'Edits you make here go live right away (no approval step for admins). Hidden clubs stay in the sheet but don\'t show on the site.'));
+  if (openForm === 'new') {
+    p.appendChild(h('div', { class: 'club' }, h('h3', {}, 'New club'),
+      clubForm({ year: 1, format: 'Online', colour: 'ocean' }, 'Create club', function (data, btn) { call('saveClub', ['', data], 'Club created.', btn); })));
+  } else {
+    p.appendChild(h('p', {}, h('button', { class: 'btn yellow', onclick: function () { openForm = 'new'; render(); } }, '+ Add a club')));
+  }
+  var clubs = S.clubs.slice().sort(function (a, b) { return (+a.order || 0) - (+b.order || 0); });
+  clubs.forEach(function (c) {
+    var key = 'club:' + c.id, visible = String(c.visible).toUpperCase() !== 'FALSE';
+    var eds = S.editors.filter(function (e) { return e.club_id === String(c.id); });
+    var card = h('div', { class: 'club c-' + (c.colour || 'ocean') + (visible ? '' : ' hidden-club') },
+      h('div', { class: 'row' },
+        h('h3', {}, (c.icon || '') + ' ' + c.name),
+        visible ? null : h('span', { class: 'status st-rejected' }, 'hidden'),
+        h('span', { style: 'margin-left:auto' }, ''),
+        h('button', { class: 'btn tiny', title: 'Move up', onclick: function (e) { call('moveClub', [c.id, -1], null, e.target); } }, '↑'),
+        h('button', { class: 'btn tiny', title: 'Move down', onclick: function (e) { call('moveClub', [c.id, 1], null, e.target); } }, '↓'),
+        h('button', { class: 'btn tiny', onclick: function (e) { call('setClubVisible', [c.id, !visible], visible ? 'Hidden from site.' : 'Shown on site.', e.target); } }, visible ? 'Hide' : 'Show'),
+        openForm === key ? null : h('button', { class: 'btn tiny yellow', onclick: function () { openForm = key; render(); } }, 'Edit')),
+      h('p', { class: 'muted', style: 'margin:4px 0 0' },
+        'Editors: ' + (eds.length ? eds.map(function (e) { return e.email + ' (' + e.role + ')'; }).join(', ') : 'none yet')));
+    if (openForm === key) card.appendChild(clubForm(c, 'Save & publish', function (data, btn) { call('saveClub', [c.id, data], 'Saved & published.', btn); }));
+    p.appendChild(card);
+  });
+}
+
+function renderPeople(p) {
+  var email = h('input', { type: 'email', placeholder: 'name@schoolathome.ca' });
+  var club = h('select');
+  S.clubs.forEach(function (c) { club.appendChild(h('option', { value: c.id }, c.name)); });
+  var role = h('select', {}, h('option', { value: 'Leader' }, 'Leader (student)'), h('option', { value: 'Sponsor' }, 'Sponsor (staff)'));
+  var addBtn = h('button', { class: 'btn yes', type: 'submit' }, 'Assign');
+  var f = h('form', { class: 'club-form' },
+    h('div', {}, h('label', {}, 'Email'), email),
+    h('div', {}, h('label', {}, 'Club'), club),
+    h('div', {}, h('label', {}, 'Role'), role),
+    h('div', { style: 'align-self:end' }, addBtn));
+  f.addEventListener('submit', function (e) {
+    e.preventDefault(); call('assignEditor', [email.value, club.value, role.value], 'Assigned — they\'ve been emailed a link.', addBtn);
+  });
+  p.appendChild(h('h3', {}, 'Assign someone to a club'));
+  p.appendChild(h('p', { class: 'muted' }, 'They\'ll be able to edit that club\'s entry (you approve changes). They get an email with the editor link.'));
+  p.appendChild(f);
+
+  p.appendChild(h('h3', { style: 'margin-top:24px' }, 'Current assignments'));
+  if (!S.editors.length) p.appendChild(h('p', { class: 'hand' }, 'Nobody assigned yet.'));
+  else {
+    var t = h('table', {}, h('tr', {}, h('th', {}, 'Email'), h('th', {}, 'Club'), h('th', {}, 'Role'), h('th', {}, '')));
+    S.editors.slice().sort(function (a, b) { return clubName(a.club_id).localeCompare(clubName(b.club_id)); }).forEach(function (e) {
+      t.appendChild(h('tr', {}, h('td', {}, e.email), h('td', {}, clubName(e.club_id)), h('td', {}, e.role),
+        h('td', {}, confirmBtn('remove', function (b) { call('removeEditor', [e.email, e.club_id], 'Removed.', b); }))));
+    });
+    p.appendChild(t);
+  }
+
+  p.appendChild(h('h3', { style: 'margin-top:24px' }, 'Admins'));
+  p.appendChild(h('p', { class: 'muted' }, 'Admins can approve edits, manage clubs and assign people.'));
+  var al = h('ul');
+  S.admins.forEach(function (a) {
+    al.appendChild(h('li', {}, a + ' ', String(a).toLowerCase() === S.email ? h('span', { class: 'muted' }, '(you)')
+      : confirmBtn('remove', function (b) { call('removeAdmin', [a], 'Admin removed.', b); })));
+  });
+  p.appendChild(al);
+  var ae = h('input', { type: 'email', placeholder: 'name@schoolathome.ca', style: 'max-width:280px' });
+  var ab = h('button', { class: 'btn', type: 'submit' }, 'Add admin');
+  var af = h('form', { class: 'row' }, ae, ab);
+  af.addEventListener('submit', function (e) { e.preventDefault(); call('addAdmin', [ae.value], 'Admin added.', ab); });
+  p.appendChild(af);
+}
+
+load();
+</script>
+</body>
+</html>

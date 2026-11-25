@@ -1,6 +1,9 @@
 /*
   TLA Student Clubs — club list
   ------------------------------------------------------------
+  BACKUP LIST. Once feedUrl (bottom of this file) is set, clubs come from the
+  Google Sheet / editor instead, and this list is only used if the sheet can't load.
+
   To add, edit or remove a club, change the entries below.
   Each club is one { ... } block. Keep the commas between blocks.
 
@@ -61,8 +64,13 @@ window.TLA_CLUBS = [
 /* Site-wide links and contacts */
 window.TLA_SETTINGS = {
   schoolYear: "2026/27",
-  joinForm: "https://docs.google.com/forms/d/e/1FAIpQLSe98TLw06ExBV7AliKZrelVztYRK7CCI6Svaj5kMrUADg_j-A/viewform?usp=dialog",
+  joinForm: "https://forms.gle/8RwX9NMCMAW4BFwK8",
   proposalForm: "https://docs.google.com/forms/d/e/1FAIpQLSeHKl-xAI7g-a8z7FTvEJKGFSJdbGOrFFJmW0bmSE_VAgsOjg/viewform?usp=header",
+  /* Paste the "Publish to web" CSV link of the sheet's Clubs tab here.
+     When set, the site loads clubs from the sheet (and the list above is only a backup). */
+  feedUrl: "",
+  /* The editor web app link (Apps Script → Deploy → Web app URL) */
+  editorUrl: "",
   managerName: "Mr. Edmund Buskell",
   managerEmail: "ebuskell@schoolathome.ca"
 };
