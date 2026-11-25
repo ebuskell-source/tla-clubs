@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TLA Student Clubs</title>
+  <meta name="description" content="Join or start a student-led club at Traditional Learning Academy Online. Open to TLA students in grades 7–12.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231c2a4a'/><text x='50' y='67' font-size='46' text-anchor='middle' fill='%23e6b85c' font-family='Georgia,serif' font-weight='700'>TLA</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#clubs">Skip to clubs</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#top" aria-label="TLA Student Clubs home">
+        <span class="brand__mark">TLA</span>
+        <span class="brand__text">Student Clubs</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#clubs">Clubs</a>
+        <a href="#join">How to join</a>
+        <a href="#start">Start a club</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn--small js-join" href="#" target="_blank" rel="noopener">Join a club</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="js-year">2026/27</span> school year</p>
+          <h1>Find your people.<br><em>Start something.</em></h1>
+          <p class="lede">TLA Student Clubs are back! Led by students in grades 10–12 and open to every TLA student in grades 7–12 — join one, join several, or start your own.</p>
+          <div class="hero__actions">
+            <a class="btn" href="#clubs">Browse the clubs</a>
+            <a class="btn btn--ghost" href="#start">Start a club</a>
+          </div>
+        </div>
+        <ul class="hero__stats" aria-label="At a glance">
+          <li><strong class="js-count">3</strong><span>clubs running</span></li>
+          <li><strong>7–12</strong><span>grades can join</span></li>
+          <li><strong>100%</strong><span>student-led</span></li>
+          <li><strong>Free</strong><span>to join or start</span></li>
+        </ul>
+      </div>
+      <div class="hero__shapes" aria-hidden="true">
+        <span class="shape shape--a"></span><span class="shape shape--b"></span><span class="shape shape--c"></span>
+      </div>
+    </section>
+
+    <!-- CLUBS -->
+    <section id="clubs" class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <div>
+            <p class="eyebrow">Club directory</p>
+            <h2>This year's clubs</h2>
+            <p class="muted">Tap a club to read more. Questions about a specific club? Contact its leader(s) directly.</p>
+          </div>
+          <div class="filters" role="group" aria-label="Filter clubs">
+            <label class="search">
+              <span class="sr-only">Search clubs</span>
+              <input type="search" id="search" placeholder="Search clubs…" autocomplete="off">
+            </label>
+            <div class="chips">
+              <button class="chip is-active" data-filter="all">All</button>
+              <button class="chip" data-filter="Online">Online</button>
+              <button class="chip" data-filter="In person">In person</button>
+            </div>
+          </div>
+        </div>
+        <div id="club-grid" class="grid" aria-live="polite"></div>
+        <p id="empty" class="empty" hidden>No clubs match that search. Got an idea? <a href="#start">Start it yourself!</a></p>
+      </div>
+    </section>
+
+    <!-- HOW TO JOIN -->
+    <section id="join" class="section section--tint">
+      <div class="wrap">
+        <p class="eyebrow">How to join</p>
+        <h2>Joining takes about two minutes</h2>
+        <ol class="steps">
+          <li>
+            <span class="steps__n">1</span>
+            <h3>Pick your clubs</h3>
+            <p>Browse the directory above. You can join one club or as many as you like.</p>
+          </li>
+          <li>
+            <span class="steps__n">2</span>
+            <h3>Check with your parents</h3>
+            <p>Clubs are entirely student-led, and joining assumes parental permission.</p>
+          </li>
+          <li>
+            <span class="steps__n">3</span>
+            <h3>Fill out the sign-up form</h3>
+            <p>Sign in with your schoolathome account and submit the <a class="js-join" href="#" target="_blank" rel="noopener">club sign-up form</a>.</p>
+          </li>
+          <li>
+            <span class="steps__n">4</span>
+            <h3>Watch your Google Chats</h3>
+            <p>We'll process your sign-up as soon as possible and add you to the club's TLA Google Chat space — check it regularly!</p>
+          </li>
+        </ol>
+        <div class="cta-strip">
+          <p><strong>Ready?</strong> Sign up for a club using your schoolathome account.</p>
+          <a class="btn js-join" href="#" target="_blank" rel="noopener">Open the sign-up form</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- START A CLUB -->
+    <section id="start" class="section">
+      <div class="wrap">
+        <p class="eyebrow">Start a club</p>
+        <h2>Have an idea? Lead a club.</h2>
+        <p class="lede lede--narrow">Clubs are a chance to get together with others who share your passions — books, art, geography, or anything in between. If you're in grade 10, 11 or 12, here's how to start one.</p>
+
+        <div class="start">
+          <div class="start__procedure">
+            <h3>The procedure</h3>
+            <ol class="timeline">
+              <li><strong>Come up with an idea.</strong> Clubs must be led by a student in grade 10, 11 or 12, and the theme must be school-appropriate. Proposals are reviewed before being added to the club list.</li>
+              <li><strong>Read the notes</strong> on this page and make sure you understand them.</li>
+              <li><strong>Check the <a href="#clubs">club directory</a></strong> to make sure your idea hasn't been taken already.</li>
+              <li><strong>Fill out the <a class="js-propose" href="#" target="_blank" rel="noopener">club proposal form</a></strong> (sign in to your schoolathome account first). Apply as soon as possible so nobody else takes your idea!</li>
+              <li><strong>We'll be in touch.</strong> Once we receive your proposal, we'll contact you to coordinate your club's publication.</li>
+            </ol>
+            <a class="btn js-propose" href="#" target="_blank" rel="noopener">Propose a club</a>
+          </div>
+
+          <aside class="ideas" aria-labelledby="ideas-h">
+            <h3 id="ideas-h">Need inspiration?</h3>
+            <ul class="idea-list">
+              <li>Novels</li><li>Languages</li><li>Sports</li><li>Drama / Acting</li><li>Comedy</li>
+              <li>TV Shows / Video Games</li><li>Geography</li><li>Hair Styling</li><li>Cooking</li><li>Knitting / Sewing</li>
+            </ul>
+            <p class="muted">…or come up with your own!</p>
+          </aside>
+        </div>
+
+        <h3 class="notes__title">Good to know</h3>
+        <div class="notes">
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">💬</span>
+            <h4>Online communication</h4>
+            <p>Every club needs some kind of online communication — we recommend Google Chat through schoolathome accounts. Meetings can be online or in person, but online is recommended: in past years it's been harder to grow in-person clubs.</p>
+          </article>
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">🛡️</span>
+            <h4>Chat guidelines</h4>
+            <p>Set chat guidelines right away. Chats must stay school-appropriate, and you may want to keep them on-topic too. The Student Clubs manager is included in every club chat space.</p>
+          </article>
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">✅</span>
+            <h4>Parental permission</h4>
+            <p>Creating a club assumes parental permission.</p>
+          </article>
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">🎟️</span>
+            <h4>100% free</h4>
+            <p>Starting a club costs nothing. No funding is provided by TLA.</p>
+          </article>
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">🤝</span>
+            <h4>Lead solo or with a friend</h4>
+            <p>Clubs can be managed individually or co-led with a friend.</p>
+          </article>
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">🎓</span>
+            <h4>TLA students only</h4>
+            <p>Clubs are limited to current TLA students. Want an alumnus to join for a special event? Get prior approval from <span class="js-manager">Mr. Edmund Buskell</span>.</p>
+          </article>
+          <article class="note">
+            <span class="note__icon" aria-hidden="true">🔁</span>
+            <h4>Idea already taken?</h4>
+            <p>We'll let you know. You're welcome to join the existing club, or co-manage it if the original leader(s) agree — another reason to submit early!</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--dark">
+      <div class="wrap contact">
+        <div>
+          <p class="eyebrow eyebrow--light">Questions?</p>
+          <h2>Talk to the Student Clubs manager</h2>
+          <p>For questions about a specific club, contact its leader(s). For anything else — comments, concerns, or a club idea you want to talk through — email <span class="js-manager">Mr. Edmund Buskell</span>, your friendly neighbourhood tech support!</p>
+        </div>
+        <a class="btn btn--gold js-manager-email" href="mailto:ebuskell@schoolathome.ca">ebuskell@schoolathome.ca</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>© <span class="js-this-year">2026</span> Traditional Learning Academy Online · TLA Student Clubs <span class="js-year">2026/27</span></p>
+      <p><a href="#top">Back to top ↑</a></p>
+    </div>
+  </footer>
+
+  <!-- Club detail dialog -->
+  <dialog id="club-dialog" class="dialog" aria-labelledby="dlg-title">
+    <div class="dialog__body" id="dlg-content"></div>
+  </dialog>
+
+  <script src="assets/clubs.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
