@@ -1,22 +1,28 @@
 /* TLA Student Clubs — plain, hand-written CSS. No frameworks. */
 
 :root {
-  --paper: #fffdf6;
-  --desk: #efe8d8;
-  --ink: #1b1b1b;
-  --navy: #1f2f5c;
-  --red: #c0392b;
-  --blue-link: #1a4fb0;
-  --hl: #fff27a;
-  --line: #c9dcef;
-  --margin: #f0a3a3;
+  /* colours taken from the TLA logo */
+  --tla-blue: #6e8eb4;
+  --tla-blue-d: #3f5f86;   /* darker shade of the logo blue, for text */
+  --tla-gold: #ecd075;
+  --tla-gold-d: #b8962e;   /* darker shade of the logo gold, for text/lines */
 
-  --berry: #c2185b;
-  --forest: #2e7d32;
-  --ocean: #1565c0;
-  --gold-c: #b8860b;
-  --plum: #6a1b9a;
-  --rust: #bf4a10;
+  --paper: #fffdf6;
+  --desk: #f3efe4;
+  --ink: #26303d;
+  --navy: var(--tla-blue);
+  --red: var(--tla-blue-d);
+  --blue-link: var(--tla-blue-d);
+  --hl: #f4e3a4;
+  --line: #d3e0ee;
+  --margin: #ecd075;
+
+  --berry: #a8577a;
+  --forest: #5f8a6a;
+  --ocean: var(--tla-blue);
+  --gold-c: var(--tla-gold-d);
+  --plum: #7f6fa3;
+  --rust: #b07045;
 
   --hand: "Patrick Hand", "Comic Neue", "Chalkboard SE", "Segoe Print", cursive;
   --serif: Georgia, "Times New Roman", serif;
@@ -35,14 +41,14 @@ body {
   background-color: var(--desk);
   /* a little cork-board speckle */
   background-image:
-    radial-gradient(#d9ceb6 1px, transparent 1.2px),
-    radial-gradient(#e4dac5 1px, transparent 1.2px);
+    radial-gradient(#ddd6c4 1px, transparent 1.2px),
+    radial-gradient(#e6e0d0 1px, transparent 1.2px);
   background-size: 22px 22px, 31px 31px;
   background-position: 0 0, 11px 7px;
 }
 
 a { color: var(--blue-link); }
-a:visited { color: #5b2a91; }
+a:visited { color: var(--tla-blue-d); }
 a:hover { background: var(--hl); color: var(--ink); }
 
 h1, h2, h3, h4 { font-family: var(--serif); margin: 0 0 .4em; line-height: 1.15; }
@@ -65,7 +71,7 @@ p { margin: 0 0 1em; }
   margin-bottom: .3em;
 }
 .eyebrow::before { content: "// "; }
-.eyebrow--light { color: #ffd76b; }
+.eyebrow--light { color: var(--tla-gold); }
 
 .lede { font-size: 1.15rem; max-width: 36em; }
 .lede--narrow { max-width: 40em; margin-bottom: 1.6rem; }
@@ -77,7 +83,7 @@ mark, .hl {
   color: inherit;
 }
 .scribble {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 30 2, 60 11, 90 6 S 150 2, 198 7' fill='none' stroke='%23c0392b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") bottom left / 100% 12px no-repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 30 2, 60 11, 90 6 S 150 2, 198 7' fill='none' stroke='%23d9b84a' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") bottom left / 100% 12px no-repeat;
   padding-bottom: 8px;
 }
 
@@ -98,7 +104,7 @@ mark, .hl {
 .btn:hover { background: var(--hl); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
 .btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
 .btn--ghost { background: transparent; }
-.btn--gold, .btn--yellow { background: #ffd76b; }
+.btn--gold, .btn--yellow { background: var(--tla-gold); }
 .btn--small { padding: .35em .8em; font-size: .88rem; }
 
 /* Top bar */
@@ -106,9 +112,9 @@ mark, .hl {
   position: sticky; top: 0; z-index: 20;
   background: var(--navy);
   color: #fff;
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 3px solid var(--tla-gold);
 }
-.topbar__inner { display: flex; align-items: center; gap: 20px; height: 62px; }
+.topbar__inner { display: flex; align-items: center; gap: 20px; height: 70px; }
 .brand { display: flex; align-items: center; gap: 8px; color: #fff !important; text-decoration: none; }
 .brand:hover { background: none; }
 .brand__mark {
@@ -116,7 +122,7 @@ mark, .hl {
   border: 2px solid var(--ink); padding: 2px 5px 0;
   transform: rotate(-4deg); box-shadow: 2px 2px 0 #000; line-height: 0;
 }
-.brand__mark img { height: 38px; width: auto; }
+.brand__mark img { height: 46px; width: auto; }
 .hero__logo {
   position: absolute; top: 18px; right: 20px; width: 92px;
   transform: rotate(6deg); opacity: .9;
@@ -124,10 +130,10 @@ mark, .hl {
 .brand__text { font-family: var(--serif); font-size: 1.15rem; font-weight: bold; }
 .nav { margin-left: auto; display: flex; gap: 4px; font-family: var(--mono); font-size: .93rem; }
 .nav a { color: #fff; text-decoration: none; padding: 4px 8px; }
-.nav a::before { content: "["; color: #ffd76b; }
-.nav a::after { content: "]"; color: #ffd76b; }
-.nav a:hover { background: #ffd76b; color: var(--ink); }
-.topbar .btn { box-shadow: 3px 3px 0 #000; }
+.nav a::before { content: "["; color: var(--tla-gold); }
+.nav a::after { content: "]"; color: var(--tla-gold); }
+.nav a:hover { background: var(--tla-gold); color: var(--ink); }
+.topbar .btn { box-shadow: 3px 3px 0 var(--ink); }
 
 /* Hero — a sheet of lined paper */
 .hero { padding: 48px 0 40px; }
@@ -145,25 +151,25 @@ mark, .hl {
 }
 .hero__copy::before { /* tape */
   content: ""; position: absolute; top: -14px; left: 40%;
-  width: 110px; height: 28px; background: rgba(255,240,150,.75);
+  width: 110px; height: 28px; background: rgba(236,208,117,.6);
   border: 1px dashed rgba(0,0,0,.15); transform: rotate(3deg);
 }
 .hero h1 { font-size: clamp(2.3rem, 5.5vw, 3.6rem); margin-bottom: .35em; }
-.hero h1 em { font-family: var(--hand); font-style: normal; font-weight: normal; color: var(--red); font-size: 1.1em; }
+.hero h1 em { font-family: var(--hand); font-style: normal; font-weight: normal; color: var(--tla-blue); font-size: 1.1em; }
 .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 1.2rem; }
 
 .hero__stats { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .hero__stats li {
-  background: #fff7a8; padding: 14px 12px 16px;
+  background: #f7e9b4; padding: 14px 12px 16px;
   box-shadow: 2px 3px 0 rgba(0,0,0,.2);
   font-family: var(--hand);
   text-align: center;
 }
 .hero__stats li:nth-child(1) { transform: rotate(-3deg); }
-.hero__stats li:nth-child(2) { transform: rotate(2deg); background: #ffcfe0; }
-.hero__stats li:nth-child(3) { transform: rotate(1.5deg); background: #c9f0d2; }
-.hero__stats li:nth-child(4) { transform: rotate(-2deg); background: #cfe3ff; }
-.hero__stats strong { display: block; font-size: 2.2rem; line-height: 1; }
+.hero__stats li:nth-child(2) { transform: rotate(2deg); background: #dbe6f2; }
+.hero__stats li:nth-child(3) { transform: rotate(1.5deg); background: #dbe6f2; }
+.hero__stats li:nth-child(4) { transform: rotate(-2deg); background: #f7e9b4; }
+.hero__stats strong { display: block; font-size: 2.2rem; line-height: 1; color: var(--tla-blue-d); }
 .hero__stats span { font-size: 1.1rem; }
 .hero__shapes { display: none; }
 
@@ -176,9 +182,9 @@ mark, .hl {
   padding: 32px 34px 38px;
 }
 .section--tint > .wrap { background: #fff; }
-.section--dark > .wrap { background: var(--navy); color: #eef; }
+.section--dark > .wrap { background: var(--tla-blue); color: #fff; }
 .section--dark h2 { color: #fff; }
-.section--dark a:not(.btn) { color: #ffd76b; }
+.section--dark a:not(.btn) { color: var(--tla-gold); }
 
 .section__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; border-bottom: 2px dashed #999; padding-bottom: 18px; }
 .section__head > div:first-child { max-width: 34em; }
@@ -203,7 +209,7 @@ mark, .hl {
   text-align: left; font: inherit; color: inherit; cursor: pointer;
   display: flex; flex-direction: column; gap: 6px;
   background-color: #fff;
-  background-image: repeating-linear-gradient(transparent 0 27px, #dde8f3 27px 28px);
+  background-image: repeating-linear-gradient(transparent 0 27px, #e3ebf4 27px 28px);
   background-position: 0 58px;
   border: 1px solid #aaa;
   border-top: 8px solid var(--c);
@@ -218,7 +224,7 @@ mark, .hl {
 .card::before { /* push pin */
   content: ""; position: absolute; top: -16px; left: 50%; margin-left: -9px;
   width: 18px; height: 18px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ff8a80, var(--red) 60%, #7a1d14);
+  background: radial-gradient(circle at 35% 35%, #fff3c4, var(--tla-gold) 55%, var(--tla-gold-d));
   box-shadow: 1px 2px 2px rgba(0,0,0,.4);
 }
 .card--berry  { --c: var(--berry); }
@@ -248,7 +254,7 @@ mark, .hl {
 }
 .steps h3 { font-size: 1.1rem; }
 .steps p { font-size: .95rem; margin: 0; }
-.cta-strip { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; border: 2px solid var(--ink); background: #fff7a8; padding: 14px 18px; transform: rotate(-.4deg); }
+.cta-strip { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; border: 2px solid var(--ink); background: #f7e9b4; padding: 14px 18px; transform: rotate(-.4deg); }
 .cta-strip p { margin: 0; }
 
 /* Start a club */
@@ -257,7 +263,7 @@ mark, .hl {
 .timeline { padding-left: 1.4em; margin: 0 0 20px; }
 .timeline li { margin-bottom: .8em; padding-left: .3em; }
 .timeline li::marker { font-family: var(--hand); font-size: 1.3em; color: var(--red); }
-.ideas { background: #fff7a8; padding: 22px 22px 18px; box-shadow: 3px 4px 0 rgba(0,0,0,.2); transform: rotate(1.5deg); position: relative; }
+.ideas { background: #f7e9b4; padding: 22px 22px 18px; box-shadow: 3px 4px 0 rgba(0,0,0,.2); transform: rotate(1.5deg); position: relative; }
 .ideas::before { content: ""; position: absolute; top: -12px; right: 30px; width: 90px; height: 24px; background: rgba(255,255,255,.6); border: 1px dashed rgba(0,0,0,.15); transform: rotate(-4deg); }
 .ideas h3 { font-family: var(--hand); font-size: 1.7rem; font-weight: normal; }
 .idea-list { font-family: var(--hand); font-size: 1.25rem; columns: 2; padding-left: 1.1em; margin: 0 0 10px; list-style: "✎ "; }
@@ -265,8 +271,8 @@ mark, .hl {
 
 .notes__title { margin-top: 40px; font-size: 1.6rem; }
 .notes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-.note { border: 1px solid #999; border-left: 6px solid var(--navy); background: #fff; padding: 14px 16px; }
-.note:nth-child(odd) { border-left-color: var(--red); }
+.note { border: 1px solid #999; border-left: 6px solid var(--tla-blue); background: #fff; padding: 14px 16px; }
+.note:nth-child(odd) { border-left-color: var(--tla-gold); }
 .note__icon { font-size: 1.3rem; margin-right: 4px; }
 .note h4 { display: inline; font-size: 1.05rem; }
 .note p { font-size: .94rem; margin: 6px 0 0; }

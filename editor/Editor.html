@@ -6,19 +6,19 @@
   <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <style>
-    :root { --ink:#1b1b1b; --navy:#1f2f5c; --red:#c0392b; --hl:#fff27a; --paper:#fffdf6; --link:#1a4fb0;
+    :root { --ink:#26303d; --navy:#6e8eb4; --red:#3f5f86; --hl:#f4e3a4; --gold:#ecd075; --paper:#fffdf6; --link:#3f5f86;
       --hand:"Patrick Hand","Comic Neue","Chalkboard SE",cursive; --serif:Georgia,"Times New Roman",serif; --mono:"Courier New",Courier,monospace; }
     * { box-sizing:border-box; }
     body { margin:0; font-family:var(--serif); font-size:16px; line-height:1.5; color:var(--ink);
       background:#efe8d8 radial-gradient(#d9ceb6 1px, transparent 1.2px) 0 0/22px 22px; }
     a { color:var(--link); } a:hover { background:var(--hl); }
-    header { background:var(--navy); color:#fff; border-bottom:3px solid var(--ink); }
+    header { background:var(--navy); color:#fff; border-bottom:3px solid var(--gold); }
     header .in { max-width:980px; margin:0 auto; padding:12px 16px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
     .mark { background:var(--paper); border:2px solid var(--ink); padding:2px 5px 0; transform:rotate(-4deg); display:inline-block; line-height:0; box-shadow:2px 2px 0 #000; }
     .mark img { height:34px; }
     header h1 { font-size:1.2rem; margin:0; }
     header .who { margin-left:auto; font-family:var(--mono); font-size:.85rem; }
-    header a { color:#ffd76b; }
+    header a { color:#fff3c4; }
     main { max-width:980px; margin:0 auto; padding:22px 16px 60px; }
     .box { background:var(--paper); border:2px solid var(--ink); box-shadow:5px 5px 0 rgba(0,0,0,.85); padding:22px 24px; margin-bottom:28px; }
     h2 { margin:0 0 .5em; font-size:1.6rem; }
@@ -32,14 +32,14 @@
     .btn:hover { background:var(--hl); }
     .btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
     .btn:disabled { opacity:.5; cursor:wait; }
-    .btn.yes { background:#c9f0d2; } .btn.no { background:#ffd0cc; } .btn.yellow { background:#ffd76b; }
+    .btn.yes { background:#c9f0d2; } .btn.no { background:#ffd0cc; } .btn.yellow { background:var(--gold); }
     .btn.tiny { padding:1px 7px; font-size:.8rem; box-shadow:2px 2px 0 var(--ink); }
     .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
     .tabs { display:flex; gap:6px; margin-bottom:-2px; position:relative; z-index:1; font-family:var(--mono); }
     .tabs button { font:inherit; background:#e4dcc8; border:2px solid var(--ink); border-bottom:none; padding:6px 14px; cursor:pointer; }
     .tabs button.on { background:var(--paper); font-weight:bold; }
     .club { border:1px solid #999; border-top:7px solid var(--c,#1565c0); background:#fff; padding:14px 16px; margin-bottom:14px; }
-    .c-berry{--c:#c2185b} .c-forest{--c:#2e7d32} .c-ocean{--c:#1565c0} .c-gold{--c:#b8860b} .c-plum{--c:#6a1b9a} .c-rust{--c:#bf4a10}
+    .c-berry{--c:#c2185b} .c-forest{--c:#2e7d32} .c-ocean{--c:#6e8eb4} .c-gold{--c:#b8860b} .c-plum{--c:#6a1b9a} .c-rust{--c:#bf4a10}
     .status { display:inline-block; font-family:var(--mono); font-size:.8rem; border:1.5px solid; padding:0 6px; transform:rotate(-2deg); }
     .st-pending { color:#a66a00; } .st-approved { color:#2e7d32; } .st-rejected { color:var(--red); }
     form.club-form { display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-top:12px; }
@@ -54,10 +54,10 @@
     th { background:#f2ecdf; font-family:var(--mono); font-size:.78rem; text-transform:uppercase; }
     .diff td.old { background:#ffeceb; text-decoration:line-through; color:#7a2b22; }
     .diff td.new { background:#eaf7ec; }
-    .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%) rotate(-1deg); background:#fff7a8; border:2px solid var(--ink);
+    .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%) rotate(-1deg); background:#f7e9b4; border:2px solid var(--ink);
       padding:8px 16px; font-family:var(--hand); font-size:1.2rem; box-shadow:3px 3px 0 var(--ink); display:none; z-index:9; max-width:90%; }
     .toast.err { background:#ffd0cc; }
-    .sticky { background:#fff7a8; padding:12px 14px; box-shadow:2px 3px 0 rgba(0,0,0,.2); transform:rotate(-.6deg); margin:10px 0; }
+    .sticky { background:#f7e9b4; padding:12px 14px; box-shadow:2px 3px 0 rgba(0,0,0,.2); transform:rotate(-.6deg); margin:10px 0; }
     .hidden-club { opacity:.55; }
     @media (max-width:640px){ form.club-form { grid-template-columns:1fr; } .box { padding:16px; } }
   </style>
