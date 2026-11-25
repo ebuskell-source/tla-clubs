@@ -13,8 +13,8 @@
 
 var CLUB_FIELDS = ['id', 'name', 'icon', 'colour', 'format', 'year', 'leaders', 'summary',
   'description', 'meetings', 'email', 'website', 'members', 'visible', 'order',
-  'updated_at', 'updated_by'];
-var EDITABLE = ['name', 'icon', 'colour', 'format', 'year', 'leaders', 'summary',
+  'updated_at', 'updated_by', 'sponsor'];
+var EDITABLE = ['name', 'icon', 'colour', 'format', 'year', 'leaders', 'sponsor', 'summary',
   'description', 'meetings', 'email', 'website', 'members'];
 var DRAFT_FIELDS = ['draft_id', 'club_id', 'submitted_by', 'submitted_at', 'status', 'note',
   'reviewed_by', 'reviewed_at', 'data'];
@@ -67,6 +67,12 @@ function ensureSheet_(ss, name, headers) {
     sh.appendRow(headers);
     sh.getRange(1, 1, 1, headers.length).setFontWeight('bold');
     sh.setFrozenRows(1);
+  } else {
+    // add columns introduced by newer versions of this script
+    var have = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+    headers.forEach(function (h, i) {
+      if (have[i] !== h && have.indexOf(h) === -1) sh.getRange(1, i + 1).setValue(h).setFontWeight('bold');
+    });
   }
   return sh;
 }
@@ -80,7 +86,7 @@ function seedClubs_() {
       meetings: 'Fridays, 12:00 – 1:00 p.m. (times can be adjusted if not convenient for participants)',
       email: 'peppernoble@schoolathome.ca', website: '', members: '' },
     { id: 'chess-club', name: 'Chess Club', icon: '♟️', colour: 'forest', format: 'Online', year: 3,
-      leaders: 'Oliver Lesley, Isabella Lockhart',
+      leaders: 'Oliver Lesley, Isabella Lockhart', sponsor: 'Mr. Edmund Buskell',
       summary: 'Weekly games, strategy and friendly competition for every skill level.',
       description: 'Please see the official Chess Club website for more information!',
       meetings: 'Every Friday, 3:30 – 4:30 p.m. (first meeting Nov. 7)',

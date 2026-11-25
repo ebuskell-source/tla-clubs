@@ -198,6 +198,7 @@ function clubForm(c, submitLabel, onSubmit) {
     field('format', 'Format', sel(S.formats, c.format)),
     field('colour', 'Card colour', sel(S.colours, c.colour)),
     field('leaders', 'Led by', h('input', { value: leaders }), false, 'separate names with commas'),
+    field('sponsor', 'Teacher sponsor', h('input', { value: c.sponsor || '' }), false, 'e.g. Mr. Buskell'),
     field('year', 'Years running', h('input', { type: 'number', min: 1, max: 50, value: c.year || 1 }), false, '1 = new this year'),
     field('summary', 'One-line summary', h('input', { value: c.summary || '', maxlength: 160 }), true, 'shown on the card'),
     field('description', 'Full description', h('textarea', { maxlength: 4000 }, c.description || ''), true),
@@ -234,7 +235,7 @@ function renderAdmin() {
   return box;
 }
 
-var LABELS = { name: 'Name', icon: 'Icon', colour: 'Colour', format: 'Format', year: 'Years running', leaders: 'Led by',
+var LABELS = { name: 'Name', icon: 'Icon', colour: 'Colour', format: 'Format', year: 'Years running', leaders: 'Led by', sponsor: 'Teacher sponsor',
   summary: 'Summary', description: 'Description', meetings: 'Meetings', email: 'Contact email', website: 'Website', members: 'Members' };
 
 function renderApprovals(p) {

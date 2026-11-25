@@ -55,6 +55,7 @@
         '<span class="card__summary">' + esc(c.summary || "") + "</span>" +
         '<span class="card__meta">' +
           '<span><b>Led by</b> ' + esc(leaders(c.leaders)) + "</span>" +
+          (c.sponsor ? '<span><b>Sponsor</b> ' + esc(c.sponsor) + "</span>" : "") +
           '<span><b>Meets</b> ' + esc(c.meetings || "TBD") + "</span>" +
         "</span>" +
         '<span class="card__more">Read more →</span>' +
@@ -67,7 +68,7 @@
     var html = "", shown = 0;
     clubs.forEach(function (c, i) {
       if (filter !== "all" && c.format !== filter) return;
-      var hay = [c.name, c.summary, c.description, (c.leaders || []).join(" ")].join(" ").toLowerCase();
+      var hay = [c.name, c.summary, c.description, c.sponsor, (c.leaders || []).join(" ")].join(" ").toLowerCase();
       if (q && hay.indexOf(q) === -1) return;
       html += card(c, i); shown++;
     });
@@ -104,6 +105,7 @@
       '<p class="dialog__desc">' + esc(c.description) + "</p>" +
       '<dl class="facts">' +
         "<div><dt>Led by</dt><dd>" + esc(leaders(c.leaders)) + "</dd></div>" +
+        (c.sponsor ? "<div><dt>Teacher sponsor</dt><dd>" + esc(c.sponsor) + "</dd></div>" : "") +
         "<div><dt>Meetings</dt><dd>" + esc(c.meetings || "TBD") + "</dd></div>" +
         '<div><dt>Contact</dt><dd><a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a></dd></div>" +
         (c.website ? '<div><dt>Website</dt><dd><a href="' + esc(c.website) + '" target="_blank" rel="noopener">Visit the club site ↗</a></dd></div>' : "") +

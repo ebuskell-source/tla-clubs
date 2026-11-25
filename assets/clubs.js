@@ -36,6 +36,7 @@ window.TLA_CLUBS = [
     format: "Online",
     year: 3,
     leaders: ["Oliver Lesley", "Isabella Lockhart"],
+    sponsor: "Mr. Edmund Buskell",
     summary: "Weekly games, strategy and friendly competition for every skill level.",
     description:
       "Please see the official Chess Club website for more information!",
