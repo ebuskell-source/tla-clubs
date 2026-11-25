@@ -362,7 +362,7 @@ function moveClub(clubId, dir) {
   return getState();
 }
 
-function assignEditor(email, clubId, role) {
+function assignEditor(email, clubId, role, name) {
   var admin = requireAdmin_();
   email = String(email || '').trim().toLowerCase();
   if (!/^[^\s@]+@schoolathome\.ca$/.test(email)) {
@@ -373,6 +373,18 @@ function assignEditor(email, clubId, role) {
   var existing = readTable_('Editors').filter(function (e) {
     return String(e.email).toLowerCase() === email && String(e.club_id) === String(clubId);
   })[0];
+  // A sponsor's name goes on the public site (club "sponsor" field)
+  name = String(name || '').trim().slice(0, 120);
+  if (role === 'Sponsor' && name) {
+    var club = clubById_(clubId);
+    var names = String(club.sponsor || '').split(',').map(function (x) { return x.trim(); }).filter(String);
+    if (names.indexOf(name) === -1) {
+      names.push(name);
+      club.sponsor = names.join(', ');
+      club.updated_at = new Date().toISOString(); club.updated_by = admin;
+      writeRow_('Clubs', CLUB_FIELDS, club, club._row);
+    }
+  }
   if (existing) {
     existing.role = role; writeRow_('Editors', EDITOR_FIELDS, existing, existing._row);
   } else {

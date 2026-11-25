@@ -293,14 +293,18 @@ function renderPeople(p) {
   var club = h('select');
   S.clubs.forEach(function (c) { club.appendChild(h('option', { value: c.id }, c.name)); });
   var role = h('select', {}, h('option', { value: 'Leader' }, 'Leader (student)'), h('option', { value: 'Sponsor' }, 'Sponsor (staff)'));
+  var sname = h('input', { placeholder: 'e.g. Mrs. Redfern' });
+  var snameBox = h('div', { hidden: true }, h('label', {}, 'Sponsor name ', h('small', {}, '— shown on the site')), sname);
+  role.addEventListener('change', function () { snameBox.hidden = role.value !== 'Sponsor'; });
   var addBtn = h('button', { class: 'btn yes', type: 'submit' }, 'Assign');
   var f = h('form', { class: 'club-form' },
     h('div', {}, h('label', {}, 'Email'), email),
     h('div', {}, h('label', {}, 'Club'), club),
     h('div', {}, h('label', {}, 'Role'), role),
+    snameBox,
     h('div', { style: 'align-self:end' }, addBtn));
   f.addEventListener('submit', function (e) {
-    e.preventDefault(); call('assignEditor', [email.value, club.value, role.value], 'Assigned — they\'ve been emailed a link.', addBtn);
+    e.preventDefault(); call('assignEditor', [email.value, club.value, role.value, role.value === 'Sponsor' ? sname.value : ''], 'Assigned — they\'ve been emailed a link.', addBtn);
   });
   p.appendChild(h('h3', {}, 'Assign someone to a club'));
   p.appendChild(h('p', { class: 'muted' }, 'They\'ll be able to edit that club\'s entry (you approve changes). They get an email with the editor link.'));
