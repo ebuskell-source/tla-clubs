@@ -65,7 +65,7 @@ window.TLA_CLUBS = [
 window.TLA_SETTINGS = {
   schoolYear: "2026/27",
   joinForm: "https://forms.gle/8RwX9NMCMAW4BFwK8",
-  proposalForm: "https://docs.google.com/forms/d/e/1FAIpQLSeHKl-xAI7g-a8z7FTvEJKGFSJdbGOrFFJmW0bmSE_VAgsOjg/viewform?usp=header",
+  proposalForm: "https://forms.gle/P92AzQoVwhWUEnLB6",
   /* Paste the "Publish to web" CSV link of the sheet's Clubs tab here.
      When set, the site loads clubs from the sheet (and the list above is only a backup). */
   feedUrl: "",

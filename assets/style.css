@@ -286,7 +286,7 @@ mark, .hl {
 .footer { font-family: var(--mono); font-size: .85rem; padding: 10px 0 40px; }
 .footer__inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .footer p { margin: 0; }
-.footer .handmade { font-family: var(--hand); font-size: 1.1rem; }
+.footer .js-editor { margin-right: 14px; }
 
 /* Dialog */
 .dialog { border: 2px solid var(--ink); padding: 0; width: min(620px, 100% - 28px); max-height: 88vh; box-shadow: 8px 8px 0 rgba(0,0,0,.85); background: #fff; }
