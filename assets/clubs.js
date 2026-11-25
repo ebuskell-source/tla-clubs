@@ -68,9 +68,9 @@ window.TLA_SETTINGS = {
   proposalForm: "https://forms.gle/P92AzQoVwhWUEnLB6",
   /* Paste the "Publish to web" CSV link of the sheet's Clubs tab here.
      When set, the site loads clubs from the sheet (and the list above is only a backup). */
-  feedUrl: "",
+  feedUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSUdfE3n7wklSbvZHWYzhbF1H0YLbYJKuS7cplYANhfl0ThN6g8AvSJOXy9upMKyGbAwd4TcQLF4-28/pub?gid=249775330&single=true&output=csv",
   /* The editor web app link (Apps Script → Deploy → Web app URL) */
-  editorUrl: "",
+  editorUrl: "https://script.google.com/a/macros/schoolathome.ca/s/AKfycbwkiasg90OsHwsKs43PRDEniT9bc2RbnSXOuWt5bq8hC-iD1bjQLYW9pDsEuMqItIAK/exec",
   managerName: "Mr. Edmund Buskell",
   managerEmail: "ebuskell@schoolathome.ca"
 };
