@@ -1,5 +1,5 @@
 /**
- * TLA Student Clubs — Editor (Google Apps Script, bound to the clubs Google Sheet)
+ * TLA Student Clubs — Editor (Google Apps Script; data lives in the Google Sheet SHEET_ID)
  *
  * Tabs this script uses (run setup() once to create them):
  *   Clubs     – the PUBLISHED club list. "Publish to web" this tab as CSV for the public site.
@@ -22,6 +22,12 @@ var EDITOR_FIELDS = ['email', 'club_id', 'role', 'added_by', 'added_at'];
 var COLOURS = ['berry', 'forest', 'ocean', 'gold', 'plum', 'rust'];
 var FORMATS = ['Online', 'In person', 'Online & in person'];
 var SITE_URL = 'https://ebuskell-source.github.io/tla-clubs/';
+// The Google Sheet that stores the clubs (the long ID in the sheet's URL)
+var SHEET_ID = '1QYHWUi_ThqyS7N64Ji8PFM6mRUaIPS2UBcNnvaIoh18';
+
+function ss_() {
+  return SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActive();
+}
 
 /* ---------- web app ---------- */
 
@@ -34,7 +40,7 @@ function doGet() {
 /* ---------- one-time setup ---------- */
 
 function setup() {
-  var ss = SpreadsheetApp.getActive();
+  var ss = ss_();
   var me = Session.getActiveUser().getEmail();
   ensureSheet_(ss, 'Clubs', CLUB_FIELDS);
   ensureSheet_(ss, 'Drafts', DRAFT_FIELDS);
@@ -98,7 +104,7 @@ function me_() {
 }
 
 function sheet_(name) {
-  var sh = SpreadsheetApp.getActive().getSheetByName(name);
+  var sh = ss_().getSheetByName(name);
   if (!sh) throw new Error('Missing "' + name + '" tab — run setup() first.');
   return sh;
 }
